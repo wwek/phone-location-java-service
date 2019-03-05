@@ -5,7 +5,7 @@ VERSION ?= latest
 REPO = phone-location-java-service
 NAME = phone-location-java-service
 INSTANCE = default
-PORTS = "-p 8080:800"
+PORTS = -p 8080:8080
 
 .PHONY: build push shell run start stop rm release
 
