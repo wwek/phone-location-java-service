@@ -23,10 +23,13 @@ public class PhoneLocationController {
     public RetResult<PhoneNumberInfo> phone(@RequestParam(value = "phoneNumber",required = true) String phoneNumber) {
         boolean isPhoneNumber = Pattern.matches("1\\d{6,10}",phoneNumber);
         if (!isPhoneNumber) {
-            return RetResponse.makeErrRsp("参数错误");
+            return RetResponse.makeErrRsp("参数错误，请使用正确的参数");
         }
         PhoneNumberGeo phoneNumberGeo = new PhoneNumberGeo();
         PhoneNumberInfo phoneNumberInfo = phoneNumberGeo.lookup(phoneNumber);
+        if (phoneNumberInfo == null) {
+            return RetResponse.makeErrRsp("信息为空");
+        }
         return RetResponse.makeOKRsp(phoneNumberInfo);
     }
 
